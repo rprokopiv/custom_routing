@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CSVParser.h"
+#include "Connector.h"
+#include <vector>
 
 namespace common {
 class ConnectorParser : public CSVParser {

@@ -33,10 +33,7 @@ int main(int argc, char *argv[]) {
   segment_parser.read_data();
   auto segments = segment_parser.get_segments();
 
-  auto pos = std::find_if(segments.begin(), segments.end(),
-                          [&id](const common::Segment &segment) {
-                            return segment.get_id().get_id() == id;
-                          });
+  auto pos = segments.find(common::Segment(common::UniqueId(id), {}, {}));
   if (pos == segments.end()) {
     std::cout << "requested segment was not found\n";
     return 0;

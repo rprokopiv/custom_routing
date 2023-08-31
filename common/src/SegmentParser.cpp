@@ -1,5 +1,6 @@
 #include "SegmentParser.h"
 #include <sstream>
+#include <unordered_set>
 
 namespace common {
 SegmentParser::SegmentParser(const std::filesystem::path &path)
@@ -39,10 +40,10 @@ void SegmentParser::parse_line(std::string &str) {
   points.push_back(GeoPoint(longitude, latitude));
 
   // Create the Segment object
-  m_segments.emplace_back(Segment(segmentId, connectors, points));
+  m_segments.emplace(Segment(segmentId, connectors, points));
 }
 
-std::vector<Segment> SegmentParser::get_segments() const noexcept {
+UnorderedSegments SegmentParser::get_segments() const noexcept {
   return m_segments;
 }
 

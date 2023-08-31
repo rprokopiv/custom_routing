@@ -1,11 +1,6 @@
 #pragma once
 #include <filesystem>
-#include <optional>
 #include <string>
-#include <vector>
-
-#include "Connector.h"
-#include "Segment.h"
 
 namespace common {
 class CSVParser {
