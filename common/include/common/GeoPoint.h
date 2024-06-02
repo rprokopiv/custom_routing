@@ -48,5 +48,12 @@ struct GeoPoint {
     }
     return distance;
   }
+
+  bool operator==(const GeoPoint& other){
+    return (abs(latitude - other.latitude) < 0.000001) && (abs(longitude - other.longitude) < 0.000001);
+  }
+    bool operator!=(const GeoPoint& other){
+    return (abs(latitude - other.latitude) > 0.000001) || (abs(longitude - other.longitude) > 0.000001);
+  }
 };
 } // namespace common

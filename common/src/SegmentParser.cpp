@@ -1,4 +1,4 @@
-#include "SegmentParser.h"
+#include "common/SegmentParser.h"
 #include <sstream>
 #include <unordered_set>
 
@@ -22,6 +22,9 @@ void SegmentParser::parse_line(std::string &str) {
   std::istringstream connectorsStream(connectorsStr);
   std::string connector;
   while (std::getline(connectorsStream, connector, ',')) {
+    connector.erase(remove(connector.begin(), connector.end(), '['), connector.end());
+    connector.erase(remove(connector.begin(), connector.end(), ']'), connector.end());
+    connector.erase(remove(connector.begin(), connector.end(), ' '), connector.end());
     connectors.push_back(connector);
   }
 

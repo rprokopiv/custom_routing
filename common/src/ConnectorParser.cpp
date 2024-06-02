@@ -1,4 +1,4 @@
-#include "ConnectorParser.h"
+#include "common/ConnectorParser.h"
 #include <sstream>
 
 namespace common {
@@ -23,8 +23,13 @@ void ConnectorParser::parse_line(std::string &str) {
     UniqueId id(uniqueId);
     GeoPoint point(x, y);
 
-    m_connectors.emplace_back(Connector(id, point));
+    m_connectors.insert(Connector(id, point));
   }
+}
+
+UnorderedConnectors ConnectorParser::get_connectors() const noexcept
+{
+    return m_connectors;
 }
 
 } // namespace common

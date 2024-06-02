@@ -1,10 +1,10 @@
-#include "CSVParser.h"
+#include "common/CSVParser.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
 namespace common {
-CSVParser::CSVParser(const std::filesystem::path &path) { m_path = path; }
+CSVParser::CSVParser(const std::filesystem::path &path) : m_path(path) {}
 
 void CSVParser::read_data() {
   if (!std::filesystem::exists(m_path)) {

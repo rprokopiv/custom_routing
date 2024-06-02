@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(external)
+
+# Add rapidjson as an interface library
+add_library(rapidjson INTERFACE)
+
+# Set include directories for rapidjson
+target_include_directories(rapidjson INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/rapidjson/include)
