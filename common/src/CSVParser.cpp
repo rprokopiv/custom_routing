@@ -19,6 +19,8 @@ void CSVParser::read_data() {
   }
 
   std::string line;
+  // read first line as it has id|connector|geometry line
+  std::getline(file, line);
   while (std::getline(file, line)) {
     parse_line(line);
   }

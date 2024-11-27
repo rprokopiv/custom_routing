@@ -2,6 +2,8 @@
 
 #include "GeoPoint.h"
 #include "UniqueId.h"
+
+#include <boost/pool/pool_alloc.hpp>
 #include <unordered_set>
 #include <vector>
 
@@ -27,7 +29,15 @@ private:
   std::vector<UniqueId> m_connectors;
   std::vector<GeoPoint> m_points_of_line;
 };
+template <typename T> using ArenaAllocator = boost::pool_allocator<T>;
 
 using UnorderedSegments = std::unordered_set<Segment, Segment::SegmentHash>;
+using UnorderedSegmentsWithMemoryPool =
+    std::unordered_set<Segment, Segment::SegmentHash,
+                       std::equal_to<common::Segment>,
+                       boost::pool_allocator<Segment>>;
+using UnorderedSegmentsWithArena =
+    std::unordered_set<Segment, Segment::SegmentHash,
+                       std::equal_to<common::Segment>, ArenaAllocator<Segment>>;
 
 } // namespace common

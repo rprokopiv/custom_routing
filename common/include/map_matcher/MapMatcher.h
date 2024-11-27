@@ -17,4 +17,15 @@ private:
   const UnorderedSegments &m_segments;
 };
 
+class MapMatcherWithPool {
+public:
+  MapMatcherWithPool(const UnorderedSegmentsWithMemoryPool &segments);
+  virtual ~MapMatcherWithPool() = default;
+
+  Segment match(const GeoPoint &point);
+
+private:
+  const UnorderedSegmentsWithMemoryPool &m_segments;
+};
+
 } // namespace common

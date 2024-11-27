@@ -46,4 +46,33 @@ private:
 
   common::Segment getSegmentById(const common::UniqueId &id);
 };
+
+class RouterWithMemoryPool {
+public:
+  RouterWithMemoryPool(
+      const common::UnorderedSegmentsWithMemoryPool &segments,
+      std::unique_ptr<router::CostCalculatorStrategy> &&cost_calculator);
+
+  std::vector<common::Segment, boost::pool_allocator<common::Segment>>
+  findShortestPath(const common::GeoPoint &startPoint,
+                   const common::GeoPoint &endPoint);
+
+  void set_cost_calculator(
+      std::unique_ptr<router::CostCalculatorStrategy> &cost_calculator);
+
+private:
+  const common::UnorderedSegmentsWithMemoryPool &m_segments;
+  std::unique_ptr<router::CostCalculatorStrategy> m_cost_calculator;
+  std::unordered_map<common::UniqueId, std::vector<common::Segment>,
+                     common::UniqueId::UniqueIdHash>
+      m_connectorToSegmentsMap;
+
+  void buildConnectorToSegmentsMap();
+
+  std::vector<common::Segment, boost::pool_allocator<common::Segment>>
+  dijkstra(const common::Segment &startSegment,
+           const common::Segment &endSegment);
+
+  common::Segment getSegmentById(const common::UniqueId &id);
+};
 } // namespace router

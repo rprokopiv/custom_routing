@@ -11,7 +11,7 @@ add_executable(graph_visualizer ${SOURCES})
 target_include_directories(graph_visualizer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Link with the common_functionality and rapidjson libraries
-target_link_libraries(graph_visualizer PRIVATE common_functionality rapidjson)
+target_link_libraries(graph_visualizer PRIVATE common_functionality rapidjson boost)
 
 # Set include directories for graph_visualizer
 target_include_directories(graph_visualizer
@@ -21,4 +21,4 @@ target_include_directories(graph_visualizer
 )
 
 # Ensure C++17
-set_target_properties(graph_visualizer PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
+set_target_properties(graph_visualizer PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
