@@ -1,10 +1,10 @@
-#include "CSVParser.h"
+#include "common/CSVParser.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
 namespace common {
-CSVParser::CSVParser(const std::filesystem::path &path) { m_path = path; }
+CSVParser::CSVParser(const std::filesystem::path &path) : m_path(path) {}
 
 void CSVParser::read_data() {
   if (!std::filesystem::exists(m_path)) {
@@ -19,6 +19,8 @@ void CSVParser::read_data() {
   }
 
   std::string line;
+  // read first line as it has id|connector|geometry line
+  std::getline(file, line);
   while (std::getline(file, line)) {
     parse_line(line);
   }
